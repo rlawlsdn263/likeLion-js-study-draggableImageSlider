@@ -5,6 +5,19 @@ let pressed = false;
 let startX;
 let x;
 
+const checkBoundary = () => {
+  let outer = gallery.getBoundingClientRect();
+  let inner = carousel.getBoundingClientRect();
+
+  if (parseInt(carousel.style.left) > 0) {
+    carousel.style.left = "0px";
+  }
+
+  if (inner.right < outer.right) {
+    carousel.style.left = `-${inner.width - outer.width}px`;
+  }
+};
+
 gallery.addEventListener("mouseenter", () => {
   gallery.style.cursor = "grab";
 });
@@ -25,10 +38,15 @@ gallery.addEventListener("mousemove", (e) => {
   x = e.offsetX;
 
   carousel.style.left = `${x - startX}px`;
-  console.log(x, startX);
+  console.log(x, startX, carousel.style.left);
+  checkBoundary();
 });
 
 gallery.addEventListener("mouseup", () => {
   gallery.style.cursor = "grab";
   pressed = false;
 });
+
+// gallery.addEventListener("mouseleave", () => {
+//   pressed = false;
+// });
