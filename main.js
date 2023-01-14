@@ -13,7 +13,19 @@ gallery.addEventListener("mousedown", (e) => {
   pressed = true;
   startX = e.offsetX - carousel.offsetLeft;
   gallery.style.cursor = "grabbing";
-  console.log(e.offsetX, carousel.offsetLeft);
+  console.log(
+    `startX(${startX}) = e.offsetX(${e.offsetX}) - carousel.offsetLeft(${carousel.offsetLeft})`
+  );
+});
+
+gallery.addEventListener("mousemove", (e) => {
+  if (!pressed) return;
+  e.preventDefault;
+
+  x = e.offsetX;
+
+  carousel.style.left = `${x - startX}px`;
+  console.log(x, startX);
 });
 
 gallery.addEventListener("mouseup", () => {
